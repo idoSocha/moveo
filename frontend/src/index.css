@@ -10,11 +10,15 @@ body,
 }
 .Box {
   display: inline-block;
-  border: 1px solid black;
-  padding: 20px;
+  text-align: center;
+  background-color: rgb(235, 215, 196);
+  border: 1px solid grey;
+  padding: 5px;
   margin: 10px;
   border-radius: 10px;
-  box-shadow: 5px 5px 10px 5px gainsboro;
+  box-shadow: 5px 5px 10px;
+  width: 20%;
+  overflow: hidden;
 }
 .Box:hover {
   cursor: pointer;
