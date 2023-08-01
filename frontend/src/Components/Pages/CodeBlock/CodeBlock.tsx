@@ -10,7 +10,10 @@ import CodeMirror from "@uiw/react-codemirror";
 
 function CodeBlock(): JSX.Element {
   const [code, setCode] = useState("");
+  const [newCode, setNewCode] = useState("");
+  const [counter, setCounter] = useState(0);
   const params = useParams();
+  const socket = io.connect("http://localhost:4000");
   const id = params.id;
 
   useEffect(() => {
@@ -19,31 +22,22 @@ function CodeBlock(): JSX.Element {
       .then((response) => {
         setCode(response.data[0].code);
       });
-
-    // hljs.highlightAll();
-  }, []);
-  const socket = io.connect("http://localhost:4000");
-
-  const newCode = (event: SyntheticEvent) => {
-    const newVal = event.target as HTMLInputElement;
-    return newVal.value;
-  };
+  }, [socket]);
 
   socket.on("connect", () => {
-    socket.emit("get-code-block", newCode(code));
-    socket.on("receive-code-block", (code: string) => {
-      setCode(code);
-    });
+    socket.emit("get-code-block", newCode);
   });
+
+  socket.on("receive-code-block", (code: string, counter: number) => {
+    console.log(code);
+    console.log(counter);
+  });
+
   return (
     <div className="CodeBlock">
       <h1 id="code-block-title"></h1>
-      {/* <pre>
-        <code id="code-block-code" className="language-javascript">
-          {code}
-        </code>
-      </pre> */}
-      <CodeMirror value={code} theme={"dark"} onChange={newCode} />
+      <CodeMirror value={code} theme={"dark"} onChange={(e) => setNewCode(e)} />
+      <div>{counter}</div>
     </div>
   );
 }

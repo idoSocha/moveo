@@ -43,22 +43,21 @@ logic.createCodesTable();
 let counter = 0;
 
 function increment_counter() {
-  counter++;
+  counter += 1;
   console.log("User connected");
   console.log("The counter is " + counter);
 }
 
 function decrement_counter() {
-  counter--;
+  counter -= 1;
   console.log("User connected");
   console.log("The counter is " + counter);
 }
 
 io.on("connection", (socket) => {
   increment_counter();
-  //test
-  socket.on("get-code-block", (code: string) => {
-    socket.broadcast.emit("receive-block-code", code);
+  socket.on("get-code-block", (code) => {
+    socket.broadcast.emit("receive-code-block", code, counter);
   });
 
   // // sending all the code blocks
