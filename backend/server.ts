@@ -56,6 +56,10 @@ function decrement_counter() {
 
 io.on("connection", (socket) => {
   increment_counter();
+  //test
+  socket.on("get-code-block", (code: string) => {
+    socket.broadcast.emit("receive-block-code", code);
+  });
 
   // // sending all the code blocks
   // socket.emit("get-code-blocks", );

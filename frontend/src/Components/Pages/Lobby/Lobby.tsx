@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import "./Lobby.css";
 import axios from "axios";
 import Codes from "../../Models/Codes";
-import { useNavigate, useParams } from "react-router-dom";
-// const socket = io("");
+import { useNavigate } from "react-router-dom";
 
 function Lobby(): JSX.Element {
   const [codes, setcodes] = useState<Codes[]>([]);
