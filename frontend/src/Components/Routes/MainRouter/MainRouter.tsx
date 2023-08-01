@@ -8,7 +8,7 @@ function MainRouter(): JSX.Element {
     <div className="MainRouter">
       <Routes>
         <Route path="/" element={<Lobby />} />
-        <Route path="/codeblock" element={<CodeBlock />} />
+        <Route path="/codeblock/:id" element={<CodeBlock />} />
       </Routes>
     </div>
   );

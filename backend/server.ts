@@ -57,12 +57,12 @@ function decrement_counter() {
 io.on("connection", (socket) => {
   increment_counter();
 
-  //sending all the code blocks
-  // socket.emit("get-code-blocks", codeBlocks);
+  // // sending all the code blocks
+  // socket.emit("get-code-blocks", );
 
   // sending a specific code block
-  // socket.on("get-code-block", (codeBlockId) => {
-  //   const codeBlock = codeBlocks.find((block: any) => block.id === codeBlockId);
+  // socket.emit("get-code-block", (codeBlockId:string) => {
+  //   const codeBlock = codeBlocks.find((block:string) => block.id === codeBlockId);
   //   if (codeBlock) {
   //     socket.emit("receive-code-block", codeBlock);
   //     console.log(codeBlock);

@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import "./Lobby.css";
 import axios from "axios";
 import Codes from "../../Models/Codes";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // const socket = io("");
 
 function Lobby(): JSX.Element {
   const [codes, setcodes] = useState<Codes[]>([]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,7 +23,7 @@ function Lobby(): JSX.Element {
           <div
             key={code.id}
             className="Box"
-            onClick={() => navigate("/codeBlock")}
+            onClick={() => navigate(`/codeBlock/${code.id}`)}
           >
             {code.title}
           </div>
