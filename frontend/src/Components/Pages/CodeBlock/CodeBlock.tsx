@@ -14,25 +14,28 @@ function CodeBlock(): JSX.Element {
   const [counter, setCounter] = useState(0);
   const params = useParams();
   const id = params.id;
-  let student = false;
+  let mentor = false;
 
   const sendCode = (e: string) => {
     socket.emit("get-code-block", e);
   };
 
-  useEffect(() => {
-    socket.on("receive-counter", (counter) => {
+  const getCounter = () => {
+    socket.emit("get-counter");
+    socket.on("receive-counter", (counter: number) => {
       setCounter(counter);
-      console.log(counter);
-      counter === 0 ? (student = true) : (student = false);
-      counter++;
-      student = true;
     });
+  };
+
+  useEffect(() => {
+    getCounter();
+    counter === 1 ? (mentor = true) : (mentor = false);
     axios
       .get(`http://localhost:4000/api/v1/codes/list/${id}`)
       .then((response) => {
         setCode(response.data[0].code);
       });
+    getCounter();
     socket.on("receive-code-block", (newCode) => {
       setCode(newCode);
     });
@@ -42,7 +45,7 @@ function CodeBlock(): JSX.Element {
     <div className="CodeBlock">
       <h1 id="code-block-title"></h1>
       <CodeMirror
-        editable={student}
+       { ...counter === 1 && (editable={false})}
         value={code}
         theme={"dark"}
         onChange={(e) => sendCode(e)}
