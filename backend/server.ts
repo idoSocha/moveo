@@ -11,6 +11,7 @@ import { Server } from "socket.io";
 //create server
 const app = express();
 
+// setting up the server and the cors
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -21,16 +22,13 @@ const io = new Server(server, {
 //handle cors
 app.use(cors());
 
-//how we send the data back (JSON,XML,RAW,String)
-app.use(express.json());
-
-//parse the body as json , for easy work
-app.use(bodyParser.json());
+// //parse the body as json , for easy work
+// app.use(bodyParser.json());
 
 //how to use the routes
 app.use("/api/v1/codes", router);
 
-//create our tables if they not exists
+//create our table if it does not exist
 console.log("check if table exists...");
 logic.createCodesTable();
 
@@ -45,6 +43,7 @@ function decrement_counter() {
   counter -= 1;
 }
 
+//handling both getter and setter of info from the server to the client using socket.io
 io.on("connection", (socket) => {
   increment_counter();
   socket.on("get-counter", () => {

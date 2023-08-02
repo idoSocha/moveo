@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 
 function Lobby(): JSX.Element {
   const [codes, setcodes] = useState<Codes[]>([]);
-
   const navigate = useNavigate();
 
+  //fetching the info from the DB and rendering the data to the UI
   useEffect(() => {
     axios.get("http://localhost:4000/api/v1/codes/list").then((res) => {
       setcodes(res.data);
