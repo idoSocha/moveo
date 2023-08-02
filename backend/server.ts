@@ -24,9 +24,6 @@ app.use(cors());
 //how we send the data back (JSON,XML,RAW,String)
 app.use(express.json());
 
-// //where i will save the vacations
-// server.use(express.static("public"));
-
 //parse the body as json , for easy work
 app.use(bodyParser.json());
 
@@ -37,42 +34,26 @@ app.use("/api/v1/codes", router);
 console.log("check if table exists...");
 logic.createCodesTable();
 
-//socket.io
-
 // number of users - the first one to enter is the mentor, the rest are students
 let counter = 0;
 
 function increment_counter() {
   counter += 1;
-  console.log("User connected");
-  console.log("The counter is " + counter);
 }
 
 function decrement_counter() {
   counter -= 1;
-  console.log("User connected");
-  console.log("The counter is " + counter);
 }
 
 io.on("connection", (socket) => {
   increment_counter();
   socket.on("get-counter", () => {
-    io.emit("receive-counter", counter);
+    io.emit("receive-counter", counter, socket.id);
   });
   socket.on("get-code-block", (code) => {
     socket.broadcast.emit("receive-code-block", code);
   });
 
-  // // sending all the code blocks
-  // socket.emit("get-code-blocks", );
-
-  // sending a specific code block
-  // socket.emit("get-code-block", (codeBlockId:string) => {
-  //   const codeBlock = codeBlocks.find((block:string) => block.id === codeBlockId);
-  //   if (codeBlock) {
-  //     socket.emit("receive-code-block", codeBlock);
-  //     console.log(codeBlock);
-  //   }
   socket.on("disconnect", () => {
     decrement_counter();
     if (counter == 0) {
