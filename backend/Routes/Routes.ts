@@ -18,6 +18,7 @@ router.get(
   "/list/:id",
   async (request: Request, response: Response, next: NextFunction) => {
     const id = +request.params.id;
+    const code = request.body;
     const result = await Logic.getCodeByCodeId(id);
     response.status(200).json(result);
   }

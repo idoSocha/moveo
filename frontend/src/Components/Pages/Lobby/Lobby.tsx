@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import "./Lobby.css";
 import axios from "axios";
-import Codes from "../../Models/Codes";
 import { useNavigate } from "react-router-dom";
+import Code from "../../Model/Code";
 
 function Lobby(): JSX.Element {
-  const [codes, setcodes] = useState<Codes[]>([]);
+  const [codes, setcodes] = useState<Code[]>([]);
   const navigate = useNavigate();
 
   //fetching the info from the DB and rendering the data to the UI

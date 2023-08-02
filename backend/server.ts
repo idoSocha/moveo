@@ -1,4 +1,5 @@
 //imports
+import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
 import router from "./Routes/Routes";
@@ -21,8 +22,11 @@ const io = new Server(server, {
 //handle cors
 app.use(cors());
 
+//how we send the data back (JSON,XML,RAW,String)
+app.use(express.json());
+
 // //parse the body as json , for easy work
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 
 //how to use the routes
 app.use("/api/v1/codes", router);
@@ -44,6 +48,9 @@ function decrement_counter() {
 //handling both getter and setter of info from the server to the client using socket.io
 io.on("connection", (socket) => {
   increment_counter();
+  // socket.on("join_room", (data) => {
+  //   socket.join(data);
+  // });
   socket.on("get-counter", () => {
     io.emit("receive-counter", counter, socket.id);
   });
@@ -54,19 +61,8 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     decrement_counter();
     io.emit("receive-counter", counter);
-    if (counter == 0) {
-      // Go to DB and update code text
-      // updateCode();
-      // console.log(myCodeBlock);
-    }
   });
 });
-
-// app.get("/", (req, res) => {
-//   let newText = "New text";
-//   myCodeBlock.code = newText;
-//   res.send(newText);
-// });
 
 //start the server
 server.listen(config.WebPort, () => {

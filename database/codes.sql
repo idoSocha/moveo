@@ -36,7 +36,7 @@ CREATE TABLE `code_blocks` (
 
 LOCK TABLES `code_blocks` WRITE;
 /*!40000 ALTER TABLE `code_blocks` DISABLE KEYS */;
-INSERT INTO `code_blocks` VALUES (1,'Hello World','console.log(\"hello world\")'),(2,'Addition Case','function add(a, b) { return a + b; }'),(3,'Love Case','const love = new Promise(function (resolve,reject){ const trueLove = true; if(trueLove) resolve(\"love\")}else{ reject(\"no feelings\");');
+INSERT INTO `code_blocks` VALUES (1,'Hello World','console.log(\"Hello World\");'),(2,'Addition Case','function(a,b){ return a+b};'),(3,'Love Case','const love = new Promise(function (resolve,reject){ const trueLove = true; if(trueLove) resolve(\"love\")}else{ reject(\"no feelings\");'),(4,'Basic Case','// Function is called, the return value will end up in x\nlet x= myFunction(4, 3); function myFunction(a, b) {  \n  //Function returns the product of a and b \n  return a * b; }');
 /*!40000 ALTER TABLE `code_blocks` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-02  8:08:21
+-- Dump completed on 2023-08-02 20:26:29
