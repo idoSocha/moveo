@@ -1,5 +1,4 @@
 //imports
-import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
 import router from "./Routes/Routes";
@@ -29,7 +28,6 @@ app.use(cors());
 app.use("/api/v1/codes", router);
 
 //create our table if it does not exist
-console.log("check if table exists...");
 logic.createCodesTable();
 
 // number of users - the first one to enter is the mentor, the rest are students
@@ -55,6 +53,7 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     decrement_counter();
+    io.emit("receive-counter", counter);
     if (counter == 0) {
       // Go to DB and update code text
       // updateCode();

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import * as io from "socket.io-client";
 import { useParams } from "react-router-dom";
 import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
 
 const socket = io.connect("http://localhost:4000");
 
@@ -16,7 +17,7 @@ function CodeBlock(): JSX.Element {
   const [mentor, setMentor] = useState(false);
   const params = useParams();
   const id = params.id;
-  let count = 0;
+  // let count = 0;
 
   // reaching the server on any change on the editor
   const sendCode = (e: string) => {
@@ -28,17 +29,21 @@ function CodeBlock(): JSX.Element {
   const isMentor = () => {
     socket.emit("get-counter");
     socket.on("receive-counter", (counter: number, socketNum: string) => {
-      //   setCounter(counter);
-      count = counter;
+      let count = counter;
+      console.log(count);
+
       if (count === 1) {
         const mentorId = socketNum;
+        console.log(count);
+
         if (socketNum === mentorId) {
           setMentor(true);
+          console.log(count);
         }
       }
     });
   };
-  // fetching the data from the db and activiting the isMentor function
+  // fetching the data from the db and activating the isMentor function
   useEffect(() => {
     axios
       .get(`http://localhost:4000/api/v1/codes/list/${id}`)
@@ -58,7 +63,9 @@ function CodeBlock(): JSX.Element {
       <CodeMirror
         readOnly={mentor}
         value={code}
+        height="200px"
         theme={"dark"}
+        extensions={[javascript({ jsx: true })]}
         onChange={(e) => sendCode(e)}
       />
     </div>
