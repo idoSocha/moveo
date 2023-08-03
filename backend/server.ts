@@ -1,5 +1,5 @@
 //imports
-import bodyParser from "body-parser";
+
 import cors from "cors";
 import express from "express";
 import router from "./Routes/Routes";
@@ -24,9 +24,6 @@ app.use(cors());
 
 //how we send the data back (JSON,XML,RAW,String)
 app.use(express.json());
-
-// //parse the body as json , for easy work
-app.use(bodyParser.json());
 
 //how to use the routes
 app.use("/api/v1/codes", router);
