@@ -1,12 +1,12 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node server.ts",
-    "type": "module"
+    "start": "ts-node server.ts"
   },
   "keywords": [],
   "author": "",
