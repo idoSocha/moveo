@@ -40,7 +40,7 @@ function CodeBlock(): JSX.Element {
   // fetching the data from the db and activating the isMentor function
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/api/v1/codes/list/${id}`)
+      .get(`moveo-production.up.railway.app/api/v1/codes/list/${id}`)
       .then((response) => {
         setCode(response.data[0].code);
         setTitle(response.data[0].title);
