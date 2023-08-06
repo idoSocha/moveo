@@ -63,6 +63,9 @@ io.on("connection", (socket) => {
     io.emit("receive-counter", counter);
   });
 });
+// .get('/', (req, res) => {
+//   res.send('Hello, Railway!');
+// });
 
 //start the server
 server.listen(config.WebPort, () => {
