@@ -3,10 +3,10 @@ import config from "./config";
 
 //creating a connection object
 const connection = mysql.createPool({
-  host: config.mySQLhost,
-  user: config.mySQLuser,
-  password: config.mySQLpass,
-  database: config.mySQLdatabase,
+  host: config.DB_HOST,
+  user: config.DB_USERNAME,
+  password: config.DB_PASSWORD,
+  database: config.DATABASE,
 });
 
 const execute = (sql: string): Promise<any> => {

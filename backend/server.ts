@@ -63,11 +63,8 @@ io.on("connection", (socket) => {
     io.emit("receive-counter", counter);
   });
 });
-// .get('/', (req, res) => {
-//   res.send('Hello, Railway!');
-// });
 
 //start the server
-server.listen(config.WebPort, () => {
-  console.log(`listening on http://${config.mySQLhost}:${config.WebPort}`);
+server.listen(config.PORT, () => {
+  console.log(`listening on http://${config.DB_HOST}:${config.PORT}`);
 });

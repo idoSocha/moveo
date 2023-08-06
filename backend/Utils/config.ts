@@ -1,9 +1,9 @@
 class Config {
-  public WebPort = 4000;
-  public mySQLhost = "localhost";
-  public mySQLuser = "root";
-  public mySQLpass = "12345678";
-  public mySQLdatabase = "codes";
+  public PORT = 4000;
+  public DB_HOST = "localhost";
+  public DB_USERNAME = "root";
+  public DB_PASSWORD = "12345678";
+  public DATABASE = "codes";
 }
 
 const config = new Config();
