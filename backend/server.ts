@@ -1,5 +1,5 @@
 //imports
-
+require("dotenv").config();
 import cors from "cors";
 import express from "express";
 import router from "./Routes/Routes";
