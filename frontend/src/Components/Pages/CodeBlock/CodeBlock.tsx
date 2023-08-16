@@ -7,7 +7,7 @@ import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 
 //implementing connection to the backend via socket.io
-const socket = io.connect("http://localhost:4000");
+const socket = io.connect();
 
 function CodeBlock(): JSX.Element {
   const [code, setCode] = useState("");
@@ -40,7 +40,9 @@ function CodeBlock(): JSX.Element {
   // fetching the data from the db and activating the isMentor function
   useEffect(() => {
     axios
-      .get(`moveo-production.up.railway.app/api/v1/codes/list/${id}`)
+      .get(
+        `https://ido-code-blocks-6bc493b14307.herokuapp.com/api/v1/codes/list/${id}`
+      )
       .then((response) => {
         setCode(response.data[0].code);
         setTitle(response.data[0].title);

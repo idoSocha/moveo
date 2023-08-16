@@ -11,7 +11,9 @@ function Lobby(): JSX.Element {
   //fetching the info from the DB and rendering the data to the UI
   useEffect(() => {
     axios
-      .get("moveo-production.up.railway.app/api/v1/codes/list")
+      .get(
+        "https://ido-code-blocks-6bc493b14307.herokuapp.com/api/v1/codes/list"
+      )
       .then((res) => {
         setcodes(res.data);
       });
