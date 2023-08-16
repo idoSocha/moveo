@@ -65,6 +65,6 @@ io.on("connection", (socket) => {
 });
 
 //start the server
-server.listen(process.env.PORT, () => {
-  console.log(`listening on http://${process.env.DB_HOST}:${process.env.PORT}`);
+server.listen(process.env.PORT || config.PORT, () => {
+  console.log(`listening on http://${config.DB_HOST}:${config.PORT}`);
 });
